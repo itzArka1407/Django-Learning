@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% if form.instance.pk %}Edit Note{% else %}New Note{% endif %}</title>
+</head>
+
+<body>
+    <p><a href="{% url 'core:note_list' %}">← All notes</a></p>
+
+    <h1>{% if form.instance.pk %}Edit Note{% else %}New Note{% endif %}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">Save</button>
+    </form>
+</body>
+
+</html>

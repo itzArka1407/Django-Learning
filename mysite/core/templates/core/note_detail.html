@@ -1,21 +1,21 @@
-<!DOCTYPE html>
-<html>
+{% extends "core/base.html" %}
 
-<head>
-    <title>{{ note.title }}</title>
-</head>
+{% block title %}{{ note.title }}{% endblock %}
 
-<body>
-    <p><a href="{% url 'core:note_list' %}">← Back to all notes</a></p>
-
+{% block content %}
     <h1>{{ note.title }}</h1>
 
-    <p><small>Created: {{ note.created_at }}</small></p>
-    <p><small>Updated: {{ note.updated_at }}</small></p>
+    <p><small>By {{ note.author.username }} — {{ note.created_at }}</small></p>
 
     <hr>
 
     <p>{{ note.body }}</p>
-</body>
 
-</html>
+    {% if user == note.author %}
+        <p>
+            <a href="{% url 'core:note_edit' pk=note.pk %}">Edit</a>
+            |
+            <a href="{% url 'core:note_delete' pk=note.pk %}">Delete</a>
+        </p>
+    {% endif %}
+{% endblock %}
