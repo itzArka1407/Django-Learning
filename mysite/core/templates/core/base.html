@@ -1,34 +1,38 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}My Notes{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'core/css/note.css' %}">
 </head>
 
 <body>
-    <header>
-        <a href="{% url 'core:note_list' %}">All notes</a>
-        |
-        <a href="{% url 'core:note_recent' %}">Recent</a>
-        |
-        <a href="{% url 'core:note_create' %}">+ New note</a>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="{% url 'core:note_list' %}"><strong>My Notes</strong></a>
+                <a href="{% url 'core:note_recent' %}">Recent</a>
+                <a href="{% url 'core:note_create' %}">+ New</a>
+                <span class="spacer"></span>
+                {% if user.is_authenticated %}
+                <span class="user">{{ user.username }}</span>
+                <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+                {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                {% endif %}
+            </nav>
+        </header>
 
-        {% if user.is_authenticated %}
-        <span>Logged in as <strong>{{ user.username }}</strong></span>
-        <form method="post" action="{% url 'logout' %}" style="display: inline;">
-            {% csrf_token %}
-            <button type="submit">Logout</button>
-        </form>
-        {% else %}
-        <a href="{% url 'login' %}">Login</a>
-        {% endif %}
-    </header>
-
-    <hr>
-
-    <main>
-        {% block content %}{% endblock %}
-    </main>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
 </body>
 
 </html>

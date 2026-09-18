@@ -1,0 +1,171 @@
+/* Simple, readable styling for the notes app */
+
+:root {
+    --bg: #fafafa;
+    --fg: #1a1a1a;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --accent: #2563eb;
+    --danger: #dc2626;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+header {
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+header a {
+    color: var(--fg);
+    text-decoration: none;
+}
+
+header a:hover {
+    color: var(--accent);
+}
+
+header .spacer {
+    flex: 1;
+}
+
+header .user {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+h1 {
+    font-size: 1.75rem;
+    margin: 0 0 1.5rem;
+}
+
+ul.notes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.notes li {
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+}
+
+ul.notes li:last-child {
+    border-bottom: none;
+}
+
+ul.notes a {
+    color: var(--fg);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+ul.notes a:hover {
+    color: var(--accent);
+}
+
+.meta {
+    color: var(--muted);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.note-body {
+    white-space: pre-wrap;
+    margin: 1rem 0;
+}
+
+.actions {
+    margin-top: 1.5rem;
+}
+
+.actions a,
+button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: white;
+    color: var(--fg);
+    text-decoration: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.actions a:hover,
+button:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+form p {
+    margin: 1rem 0;
+}
+
+form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+form textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+form input:focus,
+form textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: -1px;
+    border-color: transparent;
+}
+
+.errorlist {
+    color: var(--danger);
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0 0;
+    font-size: 0.875rem;
+}
+
+button.danger {
+    color: var(--danger);
+    border-color: var(--danger);
+}
+
+button.danger:hover {
+    background: var(--danger);
+    color: white;
+}

@@ -1,23 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Notes</title>
-</head>
-<body>
+{% extends "core/base.html" %}
+
+{% block content %}
     <h1>My Notes</h1>
 
     {% if notes %}
-        <ul>
+        <ul class="notes">
             {% for note in notes %}
                 <li>
-                    <strong>{{ note.title }}</strong>
-                    <p>{{ note.body }}</p>
-                    <small>{{ note.created_at }}</small>
+                    <a href="{% url 'core:note_detail' pk=note.pk %}">{{ note.title }}</a>
+                    <div class="meta">
+                        By {{ note.author.username }} — {{ note.created_at|date:"F j, Y" }}
+                    </div>
                 </li>
             {% endfor %}
         </ul>
     {% else %}
-        <p>No notes yet.</p>
+        <p>No notes yet. <a href="{% url 'core:note_create' %}">Create the first one</a>.</p>
     {% endif %}
-</body>
-</html>
+{% endblock %}

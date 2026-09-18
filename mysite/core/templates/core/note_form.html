@@ -1,22 +1,20 @@
-<!DOCTYPE html>
-<html>
+{% extends "core/base.html" %}
 
-<head>
-    <title>{% if form.instance.pk %}Edit Note{% else %}New Note{% endif %}</title>
-</head>
+{% block title %}{% if form.instance.pk %}Edit Note{% else %}New Note{% endif %}{% endblock %}
 
-<body>
-    <p><a href="{% url 'core:note_list' %}">← All notes</a></p>
-
+{% block content %}
     <h1>{% if form.instance.pk %}Edit Note{% else %}New Note{% endif %}</h1>
 
     <form method="post">
         {% csrf_token %}
-
         {{ form.as_p }}
-
-        <button type="submit">Save</button>
+        <div class="actions">
+            <button type="submit">Save</button>
+            {% if form.instance.pk %}
+                <a href="{% url 'core:note_detail' pk=form.instance.pk %}">Cancel</a>
+            {% else %}
+                <a href="{% url 'core:note_list' %}">Cancel</a>
+            {% endif %}
+        </div>
     </form>
-</body>
-
-</html>
+{% endblock %}
